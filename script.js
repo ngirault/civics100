@@ -21,6 +21,7 @@ const el={
  answerLabel:$("answerLabel"),easy:$("easy"),others:$("others"),otherBox:$("otherBox"),
  info:$("info"),hook:$("hook"),prevBtn:$("prevBtn"),nextBtn:$("nextBtn"),
  masteryBar:$("masteryBar"),masteryText:$("masteryText"),search:$("search"),list:$("list"),
+ answersToggle:$("answersToggle"),
  testCard:$("testCard"),testStatus:$("testStatus"),
  modal:$("modal"),district:$("district"),regionBtn:$("regionBtn")
 };
@@ -33,6 +34,7 @@ function readDistrict(){const d=store.get("civics_district","1");return REPS[d]?
 let idx=clampIdx(Number(store.get("civics_idx","0")));
 let ratings=readRatings();
 let district=readDistrict();
+let showAnswers=store.get("civics_show_answers","0")==="1";
 let testOrder=[],testPos=0,testCorrect=0,testWrong=0;
 
 // Q23 is the one card whose answer depends on the selected district. Everything
@@ -97,14 +99,25 @@ function updateHome(){
 
 function renderList(){
  const term=(el.search.value||"").toLowerCase();
- const listQ=Q.filter(q=>(q.q+" "+q.section+" "+q.easy.join(" ")).toLowerCase().includes(term));
- el.list.innerHTML=listQ.map(q=>`<button class="listitem" data-id="${q.id}"><small>${q.id} · ${escapeHtml(q.section)}</small><b>${escapeHtml(q.q)}</b></button>`).join("");
+ // withRegion so Q23 lists (and is searchable by) the selected district's rep.
+ const listQ=Q.map(withRegion).filter(q=>(q.q+" "+q.section+" "+q.easy.join(" ")).toLowerCase().includes(term));
+ el.list.innerHTML=listQ.map(q=>{
+  const answer=showAnswers?`<span class="listanswer">${escapeHtml(q.easy.join(" · "))}</span>`:"";
+  return `<button class="listitem" data-id="${q.id}"><small>${q.id} · ${escapeHtml(q.section)}</small><b>${escapeHtml(q.q)}</b>${answer}</button>`;
+ }).join("");
+}
+function setShowAnswers(on){
+ showAnswers=on;
+ store.set("civics_show_answers",on?"1":"0");
+ el.answersToggle.setAttribute("aria-pressed",String(on));
+ renderList();
 }
 el.list.addEventListener("click",e=>{
  const btn=e.target.closest(".listitem");
  if(btn)openQuestion(Number(btn.dataset.id));
 });
 el.search.addEventListener("input",renderList);
+el.answersToggle.addEventListener("click",()=>setShowAnswers(!showAnswers));
 
 /* ---------------------------------------------------------------- panels */
 
@@ -206,5 +219,6 @@ el.modal.addEventListener("keydown",e=>{
 
 el.district.innerHTML=Object.keys(REPS).map(d=>`<option value="${d}">District ${d} — ${escapeHtml(REPS[d])}</option>`).join("");
 el.district.value=district;
+el.answersToggle.setAttribute("aria-pressed",String(showAnswers));
 updateHome();
 displayQuestion();
