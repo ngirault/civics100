@@ -10,7 +10,7 @@ main{max-width:720px;margin:auto;padding:20px 18px 110px}
 .toolbar{display:flex;align-items:center;gap:10px;margin:4px 0 16px}.pill{background:white;border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:var(--muted);font-weight:700;font-size:14px}.pill:first-child{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pill:last-child{flex:0 0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:34px;padding:28px 36px 30px;box-shadow:0 12px 30px #19324d0b}
 .qnum{font-size:14px;color:var(--muted);font-weight:800;letter-spacing:.02em;text-transform:uppercase}.question{font-weight:800;font-size:34px;line-height:1.12;margin:18px 0 28px;letter-spacing:-.025em}
-.rule{height:1px;background:var(--line);margin:0 0 24px}.answerlabel{font-size:15px;letter-spacing:.08em;color:var(--green);font-weight:900;text-transform:uppercase}.easy{font-size:30px;font-weight:850;line-height:1.22;margin:12px 0 19px}.easy div+div{margin-top:5px}
+.rule{height:1px;background:var(--line);margin:0 0 24px}.answerlabel{font-size:15px;letter-spacing:.08em;color:var(--green);font-weight:900;text-transform:uppercase}.easy{font-size:30px;font-weight:800;line-height:1.22;margin:12px 0 19px}.easy div+div{margin-top:5px}
 .box{background:#f6f8fc;border-radius:22px;padding:18px 22px;margin:14px 0}.box h3{font-size:16px;margin:0 0 8px}.box ul{padding-left:22px;margin:0;color:#566475;line-height:1.35}.box p{margin:0;color:#3f4d5e;line-height:1.45}
 .context{background:#eef6f7;border:1px solid #d5e9e8}.context h3{color:#2b6f6a}
 .memory{background:#fff9e9;border:1px solid var(--goldline)}.memory h3{color:#80611d}

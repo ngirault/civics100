@@ -3,71 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f2f52">
+<meta name="theme-color" content="#f8faff">
+<meta name="description" content="Study the official USCIS 2008 civics test: all 100 questions with easy accepted answers, memory hooks, context notes, and a practice interview.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Civics 100 — USCIS 2008 Test">
+<meta property="og:description" content="Study the official USCIS 2008 civics test: all 100 questions with easy accepted answers, memory hooks, context notes, and a practice interview.">
 <title>Civics 100 — USCIS 2008 Test</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header><div class="brand"><div class="logo">★</div><div class="brandtext"><b>Civics 100</b><span>USCIS 2008 test · verified Sep 2026</span></div><button class="region" id="regionBtn" aria-label="Region settings">UT</button></div></header>
+<header><div class="brand"><div class="logo" aria-hidden="true">★</div><div class="brandtext"><b>Civics 100</b><span>USCIS 2008 test · verified Sep 2026</span></div><button class="region" id="regionBtn" aria-label="Region settings" aria-haspopup="dialog" aria-expanded="false">UT</button></div></header>
 
 <main>
-<section id="home" class="panel">
+<section id="home" class="panel" role="tabpanel" aria-labelledby="tab-home">
   <div class="homecard"><h2>Ready to study?</h2><p>This version uses the official USCIS 100-question (2008) civics set. Questions that ask for <b>two or three</b> responses now show that many complete answers.</p><div class="progress"><div id="masteryBar"></div></div><p id="masteryText">0 of 100 rated</p><button class="bigbtn" onclick="openQuestion(nextStudy())">Continue learning</button></div>
   <div class="homecard"><h2>Current answers</h2><p>Utah current-answer cards are set for <b>September 2026</b>: President Donald J. Trump, Vice President JD Vance, Speaker Mike Johnson, Chief Justice John G. Roberts, Jr., Governor Spencer J. Cox, Senators Mike Lee / John Curtis. Tap <b>UT</b> to choose your congressional district.</p></div>
   <div class="homecard"><h2>How the real test works</h2><p>The civics test is oral. For the 2008 test, an officer asks up to 10 questions; you need 6 correct to pass. Current officeholder answers must be correct on the day of your interview.</p><button class="bigbtn" onclick="startTest()">Start practice test</button></div>
 </section>
 
-<section id="learn" class="panel active">
+<section id="learn" class="panel active" role="tabpanel" aria-labelledby="tab-learn">
  <div class="toolbar"><div class="pill" id="sectionPill"></div><div class="pill" id="countPill"></div></div>
- <div class="card" id="learnCard">
+ <div class="card" id="learnCard" aria-live="polite">
    <div class="qnum" id="qnum"></div>
    <div class="question" id="question"></div>
    <div class="rule"></div>
    <div class="answerlabel" id="answerLabel"></div>
    <div class="easy" id="easy"></div>
    <div class="box" id="otherBox"><h3>Other USCIS-accepted answers</h3><ul id="others"></ul></div>
-   <div class="box context"><h3>📚 Quick context</h3><p id="info"></p></div>
-   <div class="box memory"><h3>💡 Memory hook</h3><p id="hook"></p></div>
+   <div class="box context"><h3><span aria-hidden="true">📚</span> Quick context</h3><p id="info"></p></div>
+   <div class="box memory"><h3><span aria-hidden="true">💡</span> Memory hook</h3><p id="hook"></p></div>
    <div class="rating"><button class="rate" onclick="rate(1)">😕 Again</button><button class="rate" onclick="rate(2)">🤔 Hard</button><button class="rate" onclick="rate(3)">😊 Knew it</button><button class="rate" onclick="rate(4)">⚡ Easy</button></div>
  </div>
  <div class="navrow"><button class="navbtn" id="prevBtn" onclick="go(-1)">← Previous</button><button class="navbtn" id="nextBtn" onclick="go(1)">Skip →</button></div>
 </section>
 
-<section id="test" class="panel">
+<section id="test" class="panel" role="tabpanel" aria-labelledby="tab-test">
  <div class="teststatus" id="testStatus"></div>
- <div class="card testcard" id="testCard">
+ <div class="card testcard" id="testCard" aria-live="polite">
    <div class="qnum" id="tQnum"></div><div class="question" id="tQuestion"></div><div class="rule"></div>
    <button class="bigbtn" id="revealBtn" onclick="revealTest()">Reveal accepted answer</button>
    <div class="answerlabel reveal" id="tAnswerLabel" style="display:none"></div>
    <div class="easy reveal" id="tEasy" style="display:none"></div>
    <div class="box reveal" id="tOtherBox" style="display:none"><h3>Other USCIS-accepted answers</h3><ul id="tOthers"></ul></div>
-   <div class="box context reveal" id="tInfoBox" style="display:none"><h3>📚 Quick context</h3><p id="tInfo"></p></div>
+   <div class="box context reveal" id="tInfoBox" style="display:none"><h3><span aria-hidden="true">📚</span> Quick context</h3><p id="tInfo"></p></div>
    <div class="resultBtns" id="resultBtns"><button class="rate wrong" onclick="testResult(false)">I missed it</button><button class="rate correct" onclick="testResult(true)">I got it</button></div>
  </div>
 </section>
 
-<section id="all" class="panel">
- <input id="search" class="search" placeholder="Search all 100 questions…" oninput="renderList()">
+<section id="all" class="panel" role="tabpanel" aria-labelledby="tab-all">
+ <input id="search" class="search" type="search" placeholder="Search all 100 questions…" aria-label="Search all 100 questions">
  <div id="list"></div>
 </section>
 </main>
 
-<nav class="bottom"><div class="bottominner">
-<button class="tab" data-panel="home"><b>⌂</b>Home</button>
-<button class="tab active" data-panel="learn"><b>▣</b>Learn</button>
-<button class="tab" data-panel="test"><b>✓</b>Test</button>
-<button class="tab" data-panel="all"><b>100</b>All</button>
+<nav class="bottom" aria-label="Sections"><div class="bottominner" role="tablist">
+<button class="tab" id="tab-home" role="tab" aria-selected="false" aria-controls="home" data-panel="home"><b aria-hidden="true">⌂</b>Home</button>
+<button class="tab active" id="tab-learn" role="tab" aria-selected="true" aria-controls="learn" data-panel="learn"><b aria-hidden="true">▣</b>Learn</button>
+<button class="tab" id="tab-test" role="tab" aria-selected="false" aria-controls="test" data-panel="test"><b aria-hidden="true">✓</b>Test</button>
+<button class="tab" id="tab-all" role="tab" aria-selected="false" aria-controls="all" data-panel="all"><b aria-hidden="true">100</b>All</button>
 </div></nav>
 
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
-<h2>Utah answers</h2>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="sheet">
+<h2 id="modalTitle">Utah answers</h2>
 <p class="note">The state is set to Utah for this build. Choose your congressional district so Question 23 shows the correct U.S. Representative.</p>
-<label>Congressional district</label><select id="district">
-<option value="1">District 1 — Blake Moore</option>
-<option value="2">District 2 — Celeste Maloy</option>
-<option value="3">District 3 — Mike Kennedy</option>
-<option value="4">District 4 — Burgess Owens</option>
-</select>
+<label for="district">Congressional district</label><select id="district"></select>
 <p class="note">Current-answer data was checked in September 2026. Because elections and appointments can change answers, verify them again close to your interview.</p>
 <button class="bigbtn close" onclick="saveRegion()">Save</button>
 </div></div>
