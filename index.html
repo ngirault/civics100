@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f2f52">
+<title>Civics 100 — USCIS 2008 Test</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><div class="brand"><div class="logo">★</div><div class="brandtext"><b>Civics 100</b><span>USCIS 2008 test · verified Sep 2026</span></div><button class="region" id="regionBtn" aria-label="Region settings">UT</button></div></header>
+
+<main>
+<section id="home" class="panel">
+  <div class="homecard"><h2>Ready to study?</h2><p>This version uses the official USCIS 100-question (2008) civics set. Questions that ask for <b>two or three</b> responses now show that many complete answers.</p><div class="progress"><div id="masteryBar"></div></div><p id="masteryText">0 of 100 rated</p><button class="bigbtn" onclick="openQuestion(nextStudy())">Continue learning</button></div>
+  <div class="homecard"><h2>Current answers</h2><p>Utah current-answer cards are set for <b>September 2026</b>: President Donald J. Trump, Vice President JD Vance, Speaker Mike Johnson, Chief Justice John G. Roberts, Jr., Governor Spencer J. Cox, Senators Mike Lee / John Curtis. Tap <b>UT</b> to choose your congressional district.</p></div>
+  <div class="homecard"><h2>How the real test works</h2><p>The civics test is oral. For the 2008 test, an officer asks up to 10 questions; you need 6 correct to pass. Current officeholder answers must be correct on the day of your interview.</p><button class="bigbtn" onclick="startTest()">Start practice test</button></div>
+</section>
+
+<section id="learn" class="panel active">
+ <div class="toolbar"><div class="pill" id="sectionPill"></div><div class="pill" id="countPill"></div></div>
+ <div class="card" id="learnCard">
+   <div class="qnum" id="qnum"></div>
+   <div class="question" id="question"></div>
+   <div class="rule"></div>
+   <div class="answerlabel" id="answerLabel"></div>
+   <div class="easy" id="easy"></div>
+   <div class="box" id="otherBox"><h3>Other USCIS-accepted answers</h3><ul id="others"></ul></div>
+   <div class="box context"><h3>📚 Quick context</h3><p id="info"></p></div>
+   <div class="box memory"><h3>💡 Memory hook</h3><p id="hook"></p></div>
+   <div class="rating"><button class="rate" onclick="rate(1)">😕 Again</button><button class="rate" onclick="rate(2)">🤔 Hard</button><button class="rate" onclick="rate(3)">😊 Knew it</button><button class="rate" onclick="rate(4)">⚡ Easy</button></div>
+ </div>
+ <div class="navrow"><button class="navbtn" id="prevBtn" onclick="go(-1)">← Previous</button><button class="navbtn" id="nextBtn" onclick="go(1)">Skip →</button></div>
+</section>
+
+<section id="test" class="panel">
+ <div class="teststatus" id="testStatus"></div>
+ <div class="card testcard" id="testCard">
+   <div class="qnum" id="tQnum"></div><div class="question" id="tQuestion"></div><div class="rule"></div>
+   <button class="bigbtn" id="revealBtn" onclick="revealTest()">Reveal accepted answer</button>
+   <div class="answerlabel reveal" id="tAnswerLabel" style="display:none"></div>
+   <div class="easy reveal" id="tEasy" style="display:none"></div>
+   <div class="box reveal" id="tOtherBox" style="display:none"><h3>Other USCIS-accepted answers</h3><ul id="tOthers"></ul></div>
+   <div class="box context reveal" id="tInfoBox" style="display:none"><h3>📚 Quick context</h3><p id="tInfo"></p></div>
+   <div class="resultBtns" id="resultBtns"><button class="rate wrong" onclick="testResult(false)">I missed it</button><button class="rate correct" onclick="testResult(true)">I got it</button></div>
+ </div>
+</section>
+
+<section id="all" class="panel">
+ <input id="search" class="search" placeholder="Search all 100 questions…" oninput="renderList()">
+ <div id="list"></div>
+</section>
+</main>
+
+<nav class="bottom"><div class="bottominner">
+<button class="tab" data-panel="home"><b>⌂</b>Home</button>
+<button class="tab active" data-panel="learn"><b>▣</b>Learn</button>
+<button class="tab" data-panel="test"><b>✓</b>Test</button>
+<button class="tab" data-panel="all"><b>100</b>All</button>
+</div></nav>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
+<h2>Utah answers</h2>
+<p class="note">The state is set to Utah for this build. Choose your congressional district so Question 23 shows the correct U.S. Representative.</p>
+<label>Congressional district</label><select id="district">
+<option value="1">District 1 — Blake Moore</option>
+<option value="2">District 2 — Celeste Maloy</option>
+<option value="3">District 3 — Mike Kennedy</option>
+<option value="4">District 4 — Burgess Owens</option>
+</select>
+<p class="note">Current-answer data was checked in September 2026. Because elections and appointments can change answers, verify them again close to your interview.</p>
+<button class="bigbtn close" onclick="saveRegion()">Save</button>
+</div></div>
+
+<script src="data/questions.js"></script>
+<script src="script.js"></script>
+</body></html>
